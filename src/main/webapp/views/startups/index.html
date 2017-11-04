@@ -1,0 +1,251 @@
+<!-- Main sidebar -->
+
+<div class="sidebar sidebar-main sidebar-default">
+
+    <div class="sidebar-fixed">
+
+
+
+        <div class="sidebar-content">
+
+            <div class="panel panel-white">
+                <div class="panel-heading">
+                    <div class="panel-title text-semibold">
+                        <i class="icon-search4 text-size-base position-left"></i>
+                        Pesquisar
+
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <form ng-submit="findStartups()">
+
+                            <div class="has-feedback has-feedback-left">
+                                <input type="search" class="form-control keywords-filter" placeholder="keywords da startup.."/>
+                                <div class="form-control-feedback">
+                                    <i class="icon-keyboard text-size-large text-muted"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div class="form-group" ng-show="existanceYears">
+                        <label class="text-muted">Startups existentes</label>
+                        <div class="has-feedback has-feedback-left">
+                            <select class="form-control" id="periods-filters">
+                                <option ng-repeat="year in existanceYears" value="{{year}}">
+                                    {{currentYear==year?'Até agora':'Até '+year}}
+                                </option>
+                            </select>
+                            <div class="form-control-feedback">
+                                <i class="icon-calendar52 text-size-large text-muted"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="panel panel-body border-top-success">
+                        <div class="text-left">
+                            <h6 class="no-margin text-semibold">Ranking</h6>
+                            <p class="content-group-sm text-muted">Baseado na classificação da MozDevz</p>
+                        </div>
+
+                        <div class="noui-slider-danger" id="noui-slider-tooltip"></div>
+
+                        <div class="clearfix">
+                            <span class="val-demo pull-left">De <span id="noui-slider-tooltip-lower-val"></span></span>
+                            <span class="val-demo pull-right">Até <span id="noui-slider-tooltip-upper-val"></span></span>
+                        </div>
+                    </div>
+
+
+                    <button ng-click="findStartups()" ng-disabled="findingStartups || isFirstLoad" class="btn bg-success-800 btn-block startups-find-btn">
+                        <span ng-if="!findingStartups">
+                            <i class="icon-search4 text-size-base position-left"></i>
+                            Encontrar startups
+                        </span>
+                        <span ng-if="findingStartups">
+                            <i class="icon-spinner4 spinner text-size-base position-left"></i>
+                            <em>Carregando..</em>
+                        </span>
+                    </button>
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+<!-- /main sidebar -->
+
+<!--
+ Main content 
+<div class="content-wrapper startups-list-container" style="display: none;">
+    
+    <list name="startupsList" each="s" src="StartupsFrontier.fetch" repeat-element=".startup-row" preFetch="preListFecth(filter)" postFetch="postListFecth(result)" per-page="10">
+
+    <ul class="media-list content-group">
+
+        <li class="media panel panel-body stack-media-on-mobile startup-row">
+            <div class="media-left">
+                <a ng-click='viewProfile(s.username)'>
+                    <img aload="webroot/assets/images/loading.gif" asrc="{{s.imageUrl}}" err="webroot/assets/images/startup.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                </a>
+                <br/><br/>
+            </div>
+
+            <div class="media-body">
+                <h6 class="media-heading text-semibold">
+                    <a style="color: #333; font-weight: bold;" ng-click='viewProfile(s.username)' >{{s.name}}</a>
+                </h6>
+
+                <ul class="list-inline list-inline-separate text-muted mb-10">
+                    <li><a style="color: #999; cursor: default;">{{s.slogan}}</a></li>
+                </ul>
+                {{s.description.substring(0,150)}}<span ng-show='s.description.length > 150'>..</span>
+                
+                
+                <br/><br/>
+
+                <div><small class="text-muted">Liderada por : <a ng-click="memberProfile(s.CEO.username)">{{s.CEO.name}}</a></small></div>
+            </div>
+
+            <div class="media-right text-nowrap">
+                <p><span class="heading-text pull-right">
+                        <i ng-class="s.rating >= 1 ? 'icon-star-full2' : (s.rating > 0 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 2 ? 'icon-star-full2' : (s.rating > 1 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 3 ? 'icon-star-full2' : (s.rating > 2 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 4 ? 'icon-star-full2' : (s.rating > 3 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 5 ? 'icon-star-full2' : (s.rating > 4 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <span class="text-muted position-right">({{s.rating}})</span>
+                    </span>
+                </p>
+                <br/>
+                <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.members_qty}} membros</span>
+
+                <br/><br/>
+                <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.created_at}}</span></small>
+            </div>
+        </li>
+
+    </ul>
+
+    <div class="row" ng-show="$empty">
+
+        <center>
+            <br/>
+            <h1 style="font-size: 100px; font-weight: bold;">:(</h1>
+            <h1>A pesquisa não retornou nenhuma startup!</h1>
+            <h5><em>trocar por foto nice</em></h5>
+            <br/>
+        </center>
+
+    </div> 
+    </list>
+</div>
+ /main content 
+-->
+
+
+<!-- Main content -->
+<div class="content-wrapper startups-list-container">
+    <!--<list name="startupsList" each="s" src="StartupsFrontier.fetch" repeat-element=".startup-row" preFetch="preListFecth(filter)" postFetch="postListFecth(result)" per-page="10">-->
+
+    <ul class="media-list content-group">
+
+        <li class="media panel panel-body stack-media-on-mobile startup-row" ng-repeat="s in startup_aux">
+            <div class="media-left">
+                <a ng-click='viewProfile(s.username)'>
+                    <img aload="webroot/assets/images/loading.gif" asrc="{{s.imageUrl}}" err="webroot/assets/images/startup.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                </a>
+                <br/><br/>
+            </div>
+
+            <div class="media-body">
+                <h6 class="media-heading text-semibold">
+                    <a style="color: #333; font-weight: bold;" ng-click='viewProfile(s.username)' >{{s.name}}</a>
+                </h6>
+
+                <ul class="list-inline list-inline-separate text-muted mb-10">
+                    <li><a style="color: #999; cursor: default;">{{s.slogan}}</a></li>
+                </ul>
+                {{s.description.substring(0,150)}}<span ng-show='s.description.length > 150'>..</span>
+                
+                
+                <br/><br/>
+
+                <div><small class="text-muted">Liderada por : <a ng-click="memberProfile(s.CEO.username)">{{s.CEO.name}}</a></small></div>
+            </div>
+
+            <div class="media-right text-nowrap">
+                <p><span class="heading-text pull-right">
+                        <i ng-class="s.rating >= 1 ? 'icon-star-full2' : (s.rating > 0 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 2 ? 'icon-star-full2' : (s.rating > 1 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 3 ? 'icon-star-full2' : (s.rating > 2 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 4 ? 'icon-star-full2' : (s.rating > 3 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <i ng-class="s.rating >= 5 ? 'icon-star-full2' : (s.rating > 4 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+                        
+                        <span class="text-muted position-right">({{s.rating}})</span>
+                    </span>
+                </p>
+                <br/>
+                <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.members_qty}} membros</span>
+
+                <br/><br/>
+                <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.created_at}}</span></small>
+            </div>
+        </li>
+
+    </ul>
+    </list>
+</div>
+<!-- /main content -->
+
+
+<!--<div class="content-wrapper loading-png-container">
+    
+        <ul class="media-list content-group">
+
+        <li class="media panel panel-body stack-media-on-mobile" data-ng-repeat="i in [1,2,3,4]">
+            <div class="media-left">
+                <div class="animated-background" style="width: 110px; height: 110px;"></div>
+            </div>
+
+            <div class="media-body">
+                <div class="animated-background" style="height: 12px; width: 170px; margin-bottom: 12px; "></div>
+                <div class="animated-background" style="height: 11px; width: 250px;"></div>
+                <br/>
+                <div class="animated-background" style="height: 8px; width: 80%; margin-bottom: 11px; "></div>
+                <div class="animated-background" style="height: 8px; width: 76%; margin-bottom: 12px; "></div>
+                <br/>
+                <div class="animated-background" style="height: 8px; width: 230px;"></div>
+            </div>
+
+            <div class="media-right text-nowrap">
+                
+            </div>
+        </li>
+
+    </ul>
+    
+</div>-->

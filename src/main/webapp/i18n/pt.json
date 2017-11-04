@@ -1,0 +1,21 @@
+{
+    "Previous":"Anterior",
+    "Next":"Próximo",
+    
+    "home" : "Home",
+    "orders" : "Pedidos",
+    "view" : "Ver",
+    "suppliers" : "Forneçedores",
+    "history" : "Histórico",
+    "create" : "Novo",
+    "proposals" : "Propostas",
+    "settings" : "Configurações",
+    "articles" : "Produtos & Serviços",
+    "not-sold" : "Não vendidos",
+    "categories" : "Categorias",
+    "user" : "Utilizador",
+    "change-password": "Alterar Senha",
+    "profile" : "Perfil"
+    
+    
+}

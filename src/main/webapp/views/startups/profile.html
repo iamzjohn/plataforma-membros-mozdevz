@@ -1,0 +1,217 @@
+<!-- Main sidebar -->
+
+<div class="sidebar sidebar-main sidebar-default">
+
+    <div class="sidebar-fixed">
+
+
+
+        <div class="sidebar-content">
+            <div style="width: 210px !important;">
+                <div style=" margin-bottom: 16px; border: 1px solid #c6c6c6; background-color: white; border-radius: 3px; padding: 3px; width: 183px !important; height: 183px !important;">
+                    <img aload="webroot/assets/images/loading.gif" asrc="{{startup.imageUrl}}" err="webroot/assets/images/startup.png" style="width:100% !important; height:100% !important;" class="img-rounded img-lg" alt="">
+                </div> 
+
+                <div class="media-body">
+                    <h6 class="media-heading text-semibold">
+                        <span style=" font-weight: bold; font-size: 24px;">{{startup.name}}</span>
+                    </h6>
+
+                    <ul class="list-inline list-inline-separate text-muted mb-10">
+                        <li><span style=" opacity: 0.8; font-size: 15px;">{{startup.slogan}}</span></li>
+                    </ul>
+                </div>
+                <p>
+                    <span class="heading-text">
+                        <i ng-class="startup.rating >= 1 ? 'icon-star-full2' : (startup.rating > 0 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                        <i ng-class="startup.rating >= 2 ? 'icon-star-full2' : (startup.rating > 1 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                        <i ng-class="startup.rating >= 3 ? 'icon-star-full2' : (startup.rating > 2 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                        <i ng-class="startup.rating >= 4 ? 'icon-star-full2' : (startup.rating > 3 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                        <i ng-class="startup.rating >= 5 ? 'icon-star-full2' : (startup.rating > 4 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                        <span class="text-muted position-right">({{startup.rating}})</span>
+                    </span>
+                </p>
+
+                <hr style="width: 180px;" class='pull-left'/>
+                <div class="list-group no-border no-padding-top">
+                    <a href="mailto:{{startup.email}}" class="list-group-item no-padding-left" style="color: #999;">
+                        <i class="icon-mention"></i> 
+                        {{startup.email}}
+                    </a>
+
+                    <a ng-if='startup.website' href="{{startup.website}}" target="_blank" class="list-group-item no-padding-left" style="color: #999;">
+                        <i class="icon-earth"></i>
+                        {{startup.website}}
+                    </a>
+                    <span ng-if='!startup.website' class="list-group-item no-padding-left" style="color: #999;">
+                        <i class="icon-earth"></i> 
+                        <span style='font-style: italic; font-size: 12px; color: #c4b909; '>
+                            Sem Website
+                        </span>
+                    </span>
+
+                    <span class="list-group-item no-padding-left" style="color: #999;"><i class="icon-location3"></i> 
+                        <span ng-if='!startup.address' style='font-style: italic; font-size: 12px; color: #c4b909; '>
+                            Sem Endereço
+                        </span>
+                        <span ng-if='startup.address' style="font-size: 12px;">
+                            {{startup.address}}
+                        </span>
+                    </span>
+                    <span class="list-group-item no-padding-left" style="color: #999;"><i class="icon-calendar"></i> Desde {{startup.created_at}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /main sidebar -->
+
+
+<!-- Main content -->
+<div class="content-wrapper">
+
+    <!-- Cover area -->
+    <div class="profile-cover">
+        <div class="profile-cover-img" style="height: 295px; background-image: url({{startup.coverUrl}})"></div>
+    </div>
+    <!-- /cover area -->
+
+
+    <!-- Toolbar -->
+    <div class="navbar navbar-default navbar-xs navbar-component no-border-radius-top">
+        <ul class="nav navbar-nav visible-xs-block">
+            <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+        </ul>
+
+        <div class="navbar-collapse collapse" id="navbar-filter">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#activity" data-toggle="tab"><i class=" icon-users4 position-left"></i> Membros</a></li>
+                <!--<li><a href="#schedule" data-toggle="tab"><i class="icon-collaboration position-left"></i> Parcerias</a></li>-->
+                <li><a href="#settings" data-toggle="tab"><i class="icon-help position-left"></i> Sobre</a></li>
+            </ul>
+
+            <div class="navbar-right">
+                <!--<ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i> <span class="visible-xs-inline-block position-right"> Options</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a href="#"><i class="icon-image2"></i> Update cover</a></li>
+                            <li><a href="#"><i class="icon-clippy"></i> Update info</a></li>
+                            <li><a href="#"><i class="icon-make-group"></i> Manage sections</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="icon-three-bars"></i> Activity log</a></li>
+                            <li><a href="#"><i class="icon-cog5"></i> Profile settings</a></li>
+                        </ul>
+                    </li>
+                </ul>-->
+            </div>
+        </div>
+    </div>
+    <!-- /toolbar -->
+
+
+    <!-- User profile -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabbable">
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="activity">
+                        <list name="membersList" each="m" src="MembersFrontier.fetchFromStartup" repeat-element=".member-row" preFetch="preListFecth(filter)" postFetch="postListFecth(result)" per-page="24">
+    
+                        <div class="col-sm-3 member-row">
+                        <div class="panel">
+                            <div class="panel-body text-center">
+                                <a ng-click='memberProfile(m.member.username)' class="display-inline-block">
+                                    <img asrc="{{m.member.imageUrl}}" aload="webroot/assets/images/loading.gif" err="webroot/assets/images/member.png" class="img-circle img-responsive" alt="" style="width: 120px; height: 120px;">
+                                </a>
+
+                                <h6 class="text-semibold no-margin-bottom">
+                                    <a ng-click='memberProfile(m.member.username)' class="text-default">{{m.member.name}} </a>
+                                    <small class="display-block" style='height: 20px;'>
+                                        {{m.member.title}}
+                                    
+                                    </small>
+                                </h6>
+                            </div>
+
+                            <div class="panel-footer text-center no-padding">
+                                <div class="row" style='padding-top: 6px; padding-bottom: 6px;'>
+                                    <span>{{m.role}}</b>
+                                </div>
+                            </div>
+                        </div>
+                        </div> 
+                        
+                        <div class='members-preloader'>
+                        <br/><br/><br/>
+                        <center>
+                            <h5 class="text-muted">
+                               
+                                <div class="theme_corners"><div class="pace_progress" data-progress-text="60%" data-progress="60"></div><div style='background-color: #eddb3d; height: 29px; width: 29px;' class="pace_activity"></div></div>
+                                 <br/>
+                            </h5>
+                        </center>
+                       
+                        <br/><br/><br/>
+                    </div>
+
+                    <div class="row" ng-show="$empty">
+
+                        <center>
+                            <br/>
+                            <h1 style="font-size: 100px; font-weight: bold;">:(</h1>
+                            <h1>A pesquisa não retornou nenhum membro!</h1>
+                            <h5><em>trocar por foto nice</em></h5>
+                            <br/>
+                        </center>
+
+                    </div>
+                        </list>
+                    </div>
+
+
+                    <!--<div class="tab-pane fade" id="schedule">
+                           
+                        <div class='col-sm-6' data-ng-repeat='a in [1]'>
+                            <div class="panel panel-body">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <a href="assets/images/demo/images/3.png">
+                                            <img src="webroot/assets/images/demo/brands/transferwise.png" class="img-rounded img-lg" alt="">
+                                        </a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Passi</h6>
+                                        <span class="text-muted">Acesso ao Banco de dados de Documentos perdidos</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="tab-pane fade" id="settings">
+                        <div class="panel panel-body border-top-grey-200">
+                            <h6 class="no-margin text-semibold">Sobre a {{startup.name}}</h6>
+                            <br/>
+                            <blockquote class="no-margin">
+                                {{startup.description}}
+                             </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /user profile -->
+
+</div>
+<!-- /main content -->
+

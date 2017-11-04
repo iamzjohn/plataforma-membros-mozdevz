@@ -1,0 +1,544 @@
+<!-- Toolbar -->
+<div class="navbar navbar-default navbar-component navbar-xs">
+    <ul class="nav navbar-nav visible-xs-block">
+        <li class="full-width text-center"><a data-toggle="collapse" data-target="#navbar-filter"><i class="icon-menu7"></i></a></li>
+    </ul>
+
+    <div class="navbar-collapse collapse" id="navbar-filter">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#activity" data-toggle="tab"><i class="icon-office position-left"></i> Startups</a></li>
+            <!--<li><a href="#schedule" data-toggle="tab"><i class="icon-graduation position-left"></i> Formações</a></li>
+            <li><a href="#settings" data-toggle="tab"><i class="icon-stack-text position-left"></i> Trabalhos</a></li>-->
+        </ul>
+
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li ng-if="member.website"><a href="{{member.website}}" target="_blank"><i class="icon-earth position-left"></i> </a></li>
+                <li ng-if="member.facebook"><a href="{{member.facebook}}" target="_blank"><i class="icon-facebook2 position-left"></i> </a></li>
+                <li ng-if="member.instagram"><a href="{{member.instagram}}" target="_blank"><i class="icon-instagram position-left"></i> </a></li>
+                <li ng-if="member.twitter"><a href="{{member.twitter}}" target="_blank"><i class="icon-twitter2 position-left"></i> </a></li>
+                <li ng-if="member.github"><a href="{{member.github}}" target="_blank"><i class="icon-github position-left"></i> </a></li>
+                <li ng-if="member.stackoverflow"><a href="{{member.stackoverflow}}" target="_blank"><i class="icon-stackoverflow position-left"></i> </a></li>
+                <li ng-if="member.linkedIn"><a href="{{member.linkedIn}}" target="_blank"><i class="icon-linkedin position-left"></i> </a></li>
+                <!--<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i> <span class="visible-xs-inline-block position-right"> Options</span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="#"><i class="icon-image2"></i> Editar foto de perfil</a></li>
+                        <li><a href="#"><i class="icon-clippy"></i> Editar dados</a></li>
+                        <li><a href="#"><i class="icon-lan2"></i> Editar redes sociais</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-trash"></i> Eliminar conta</a></li>
+                    </ul>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /toolbar -->
+
+
+<!-- User profile -->
+<div class="row">
+    <div class="col-lg-9">
+        <div class="tabbable">
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="activity">
+
+                    <list name="startupsList" each="s" src="StartupsFrontier.fetchFromMember" repeat-element=".startup-row" preFetch="preListFecth(filter)" postFetch="postListFecth(result)" per-page="5">
+                    <div class="row startup-row" style="padding-right: 25px; padding-left: 25px;">
+                                            <div class="panel media-list content-group startups-list-container">
+							<div class="panel-body ">
+
+
+                                                                        <div class="media-left">
+                           <a ng-click='startupProfile(s.startup.username)'>
+                               <img aload="webroot/assets/images/loading.gif" asrc="{{s.startup.imageUrl}}" err="webroot/assets/images/startup.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                           </a>
+                           <br/><br/>
+                       </div>
+
+                       <div class="media-body">
+                           <h6 class="media-heading text-semibold">
+                               <a style="color: #333; font-weight: bold;" ng-click='startupProfile(s.startup.username)' >{{s.startup.name}}</a>
+                           </h6>
+
+                           <ul class="list-inline list-inline-separate text-muted mb-10">
+                               <li><a style="color: #999; cursor: default;">{{s.startup.slogan}}</a></li>
+                           </ul>
+                           {{s.startup.description.substring(0,150)}}<span ng-show='s.startup.description.length > 150'>..</span>
+
+
+                           <br/><br/>
+
+                           <div><small class="text-muted">Liderada por : <a ng-click="memberProfile(s.startup.CEO.username)">{{s.startup.CEO.name}}</a></small></div>
+                       </div>
+
+                       <div class="media-right text-nowrap">
+                           <p><span class="heading-text pull-right">
+                                   <i ng-class="s.startup.rating >= 1 ? 'icon-star-full2' : (s.startup.rating > 0 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                   <i ng-class="s.startup.rating >= 2 ? 'icon-star-full2' : (s.startup.rating > 1 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                   <i ng-class="s.startup.rating >= 3 ? 'icon-star-full2' : (s.startup.rating > 2 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                   <i ng-class="s.startup.rating >= 4 ? 'icon-star-full2' : (s.startup.rating > 3 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                   <i ng-class="s.startup.rating >= 5 ? 'icon-star-full2' : (s.startup.rating > 4 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                   <span class="text-muted position-right">({{s.startup.rating}})</span>
+                               </span>
+                           </p>
+                           <br/>
+                           <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.startup.members_qty}} membros</span>
+
+                           <br/><br/>
+                           <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.startup.created_at}}</span></small>
+                       </div>
+
+
+							</div>
+
+					    	<div class="panel-footer text-left">
+                                                    <div style='padding-left: 20px;'>
+                                                         {{s.role}}
+                                                    </div>
+						    	
+							</div>
+						</div>
+                        </div><!--
+                    
+                    <ul class="media-list content-group startups-list-container" style="display: none;">
+
+                        <li class="media panel panel-body stack-media-on-mobile sta"rtup-row>
+                            <div class="media-left">
+                                <a ng-click='startupProfile(s.startup.username)'>
+                                    <img ng-src="{{s.startup.imageUrl}}" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                                </a>
+                                <br/><br/>
+                            </div>
+
+                            <div class="media-body">
+                                <h6 class="media-heading text-semibold">
+                                    <a style="color: #333; font-weight: bold;" ng-click='startupProfile(s.startup.username)' >{{s.startup.name}}</a>
+                                </h6>
+
+                                <ul class="list-inline list-inline-separate text-muted mb-10">
+                                    <li><a style="color: #999; cursor: default;">{{s.startup.slogan}}</a></li>
+                                </ul>
+                                {{s.startup.description.substring(0, 150)}}<span ng-show='s.startup.description.length > 150'>..</span>
+
+
+                                <br/><br/>
+
+                                <div><span class="label label-default">
+                                    {{s.role}}
+                                </span></div>
+                            </div>
+
+                            <div class="media-right text-nowrap">
+                                
+                                
+                                <br/><br/>
+                                <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.startup.members_qty}} membros</span>
+
+                                <br/><br/>
+                                <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.startup.created_at}}</span></small>
+                            </div>
+
+                        </li>
+
+
+                    </ul>
+                    -->
+                    <div class='startus-preloader'>
+                        <br/><br/><br/>
+                        <center><h1>Carregando..</h1></center>
+                        <br/><br/><br/>
+                    </div>
+
+                    <div class="row" ng-show="$empty">
+
+                        <center>
+                            <br/>
+                            <h1 style="font-size: 100px; font-weight: bold;">:(</h1>
+                            <h2>Nao tem nenhuma Startup associada!</h2>
+                            <br/>
+                               <!-- <button href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Startup</button>-->
+                        
+                            <br/>
+                        </center>
+
+                    </div>
+
+
+                    </list>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   <!-- <div class="panel panel-body stack-media-on-mobile">
+                        <div class="media-left">
+                            <a href="#" class="btn btn-link btn-icon text-success">
+                                <i class="icon-question7 icon-2x no-edge-top"></i>
+                            </a>
+                        </div>
+
+                        <div class="media-body media-middle">
+                            <h6 class="media-heading text-semibold">Tem outra startup ?</h6>
+                            Esta opcao permite que adiciones todas as startups que lideras/participas. com isso podes atrair parceiros e ate investidores.
+
+                        </div>
+
+                        <div class="media-right media-middle">
+                            <a href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Startup</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="panel-body">
+                            <div class="col-sm-10">
+
+                                <fieldset>
+                                    <legend class="text-semibold">Introduza a Informação da Startup</legend>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label">Nome da Startup :</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" placeholder="Escreva o nome da sua marca ou negócio..">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label">Slogan :</label>
+                                        <div class="col-lg-9">
+                                            <input type="password" class="form-control" placeholder="Escreva ">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 control-label">Descrição :</label>
+                                        <div class="col-lg-9">
+                                            <textarea rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <img src="webroot/assets/images/demo/brands/dell.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                                <br/><br/>
+                                <button class="btn btn-default btn-block">Salvar</button>
+                                <br/>
+                                <a href="#" class="text-danger-600">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div> 
+
+
+                <div class="tab-pane fade" id="schedule">
+                    <div class="timeline timeline-left content-group">
+                        <div class="timeline-container">
+
+                            <!-- Date stamp -->
+                            <div class="timeline-date text-muted">
+                                <i class="icon-sort-time-desc position-left"></i> <span class="text-semibold">Janeiro de </span> 2017
+                            </div>
+                            <!-- /date stamp -->
+
+                            <!-- Blog post -->
+                            <div class="timeline-row">
+                                <div class="timeline-icon">
+                                    <div>
+                                        <i class="icon-graduation icon-1x"></i>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-flat timeline-content">
+                                    <div class="panel-heading">
+                                        <h6 class="panel-title text-semibold">Engenharia de softwares - <span style='color: #df1f26;'>Primeiro ano</span> <a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                                        <div class="heading-elements">
+                                            <ul class="icons-list">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-arrow-down12"></i>
+                                                    </a>
+
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li><a href="#"><i class="icon-pencil"></i> Editar</a></li>
+                                                        <li><a href="#"><i class="icon-trash"></i> Remover</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <h4 class="content-group">
+                                            <img src="webroot/assets/images/demo/flat/18.png" class="position-left img-circle img-lg" alt="">
+                                            <b>USTM</b> - Universidade São Tomás de Moçambique
+                                        </h4>
+
+                                        <blockquote>
+                                            <p>Fui melhor aluno no primeiro ano, conclui o curso com media 12, era um dos mais fluentes na formacao. Ganhei um certificado de honra por bom comportamento.</p>
+                                        </blockquote>
+                                    </div>
+
+                                    <div class="panel-footer panel-footer-transparent"><a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                                        <div class="heading-elements">
+
+
+                                            <span class="heading-btn pull-right">
+                                                <span class="heading-text"> concluido em <span class='text-muted'>Dezembro de 2014</span></span>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /blog post -->
+
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-body stack-media-on-mobile">
+                        <div class="media-left">
+                            <a href="#" class="btn btn-link btn-icon text-success">
+                                <i class="icon-question7 icon-2x no-edge-top"></i>
+                            </a>
+                        </div>
+
+                        <div class="media-body media-middle">
+                            <h6 class="media-heading text-semibold">Alguma outra Formação ?</h6>
+                            Esta opcao permite que adiciones todas as startups que lideras/participas. com isso podes atrair parceiros e ate investidores.
+                        </div>
+
+                        <div class="media-right media-middle">
+                            <a href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Formação</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="tab-pane fade" id="settings">
+
+                    <div class="timeline timeline-left content-group">
+                        <div class="timeline-container">
+
+
+
+
+                            <!-- Date stamp -->
+                            <div class="timeline-date text-muted">
+                                <i class="icon-history position-left"></i> <span class="text-semibold">Monday</span>, April 18
+                            </div>
+                            <!-- /date stamp -->
+
+
+                            <!-- Invoices -->
+                            <div class="timeline-row">
+                                <div class="timeline-icon">
+                                    <div class="bg-danger-300">
+                                        <i class="icon-file-css2"></i>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="panel">
+                                        <div class="panel-body">
+                                            <h6 class="text-semibold no-margin-top">
+                                                <a href="#">Website do INCM - Instituto de comunicacoes de Mocambique</a>
+                                            </h6>
+                                            <div class="heading-elements">
+                                                <ul class="icons-list">
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                            <i class="icon-arrow-down12"></i>
+                                                        </a>
+
+                                                        <ul class="dropdown-menu dropdown-menu-right">
+                                                            <li><a href="#"><i class="icon-pencil"></i> Editar</a></li>
+                                                            <li><a href="#"><i class="icon-trash"></i> Remover</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class='text-muted'>Sobre Projecto</span>
+                                            <br/>
+
+                                            Participei do projecto de desenvolvimento do website do INCM, onde trabalhei como programador senio. A experiencia foi agradavel e mais..
+
+                                            <ul class="list-inline list-inline-condensed no-margin-bottom mt-15">
+                                                <li><a href="#"><img src="webroot/assets/images/demo/users/face1.jpg" class="img-circle img-xs" alt=""></a></li>
+                                                <li><a href="#"><img src="webroot/assets/images/demo/users/face24.jpg" class="img-circle img-xs" alt=""></a></li>
+                                                <li><a href="#"><img src="webroot/assets/images/demo/users/face11.jpg" class="img-circle img-xs" alt=""></a></li>
+                                                <li><span class="btn btn-xs btn-icon btn-flat btn-rounded border-grey text-grey"><i class="icon-plus22"></i></span></li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="panel-footer panel-footer-condensed">
+                                            <div class="heading-elements not-collapsible">
+                                                <span class="heading-text">
+                                                    <i class="icon-history position-left"></i>
+                                                    Abril - Marco, 2010
+                                                </span>
+
+                                                <a href='#' class=" pull-right text-success" style='padding-top: 8px;'>
+                                                    Visitar Website
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /invoices -->
+
+
+
+                        </div>
+                    </div>
+                    <div class="panel panel-body stack-media-on-mobile">
+                        <div class="media-left">
+                            <a href="#" class="btn btn-link btn-icon text-success">
+                                <i class="icon-question7 icon-2x no-edge-top"></i>
+                            </a>
+                        </div>
+
+                        <div class="media-body media-middle">
+                            <h6 class="media-heading text-semibold">Alguma outra Formação ?</h6>
+                            Esta opcao permite que adiciones todas as startups que lideras/participas. com isso podes atrair parceiros e ate investidores.
+                        </div>
+
+                        <div class="media-right media-middle">
+                            <a href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Registar Formação</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+
+        <div class="panel">
+            <div class="panel-body text-center">
+                <span class="display-inline-block">
+                    <img aload="webroot/assets/images/loading.gif" asrc="{{member.imageUrl}}" err="webroot/assets/images/member.png" class="img-circle img-responsive" />
+                </span>
+
+                <h6 class="text-semibold no-margin-bottom">
+                    <a class="text-default">{{member.name}}</a>
+                    <small class="display-block">
+                        <span ng-if="member.title">
+                            {{member.title}}
+                        </span>
+                        <span ng-if="!member.title" class="no-value-field">
+                            Indefinido
+                        </span>
+                    </small>
+                </h6>
+            </div>
+            
+
+            <div class="panel-footer text-center no-padding">
+                <div class="row">
+                    <div class="category-content">
+                        <div class="form-group" style='padding-bottom: 25px;'>
+                            <label class="control-label no-margin pull-left text-semibold">Morada</label>
+                            <div class="pull-right"><span class="label bg-success">{{member.city.name}}</span></div>
+                        </div>
+
+                        <div class="form-group" style='padding-bottom: 25px;'>
+                            <label class="control-label no-margin pull-left text-semibold">Ocupação</label>
+                            <div class="pull-right"><span class="label bg-success">{{member.occupation}}</span></div>
+                        </div>
+
+                        <div class="form-group" style='padding-bottom: 25px;'>
+                            <label class="control-label no-margin pull-left text-semibold">Género</label>
+                            <div class="pull-right"><span class="label bg-success">{{member.gender}}</span></div>
+                        </div>
+
+                        <hr/>
+
+                        <div class="form-group" style='padding-bottom: 25px;'>
+                            <label class="control-label no-margin pull-left  text-semibold">Nascido em</label>
+                            <div class="pull-right">
+                                <span ng-if="member.birthday">
+                                    {{member.birthday}}
+                                </span>
+                                <span ng-if="!member.birthday" class="no-value-field">
+                                    Não disponível
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style='padding-bottom: 25px;'>
+                            <label class="control-label no-margin pull-left text-semibold">Email</label>
+                            <div class="pull-right">{{member.email}}</div>
+                        </div>
+
+                        <div class="form-group" style='padding-bottom: 25px;'>
+                            <label class="control-label no-margin pull-left text-semibold">Telemóvel</label>
+                            <div class="pull-right">
+                                <span ng-if="member.phone">
+                                    {{member.phone}}
+                                </span>
+                                <span ng-if="!member.phone" class="no-value-field">
+                                    Não disponível
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <hr/>
+
+                        <div class="form-group" style='padding-bottom: 5px;'>
+                            <label class="control-label no-margin pull-left text-muted">TECNOLOGIAS</label>
+                            <br/>
+                            <ul style="margin-top: 30px;" ng-if="member.technologies" class="list-inline list-inline-condensed no-margin-bottom">
+                                <li ng-repeat="tech in member.technologies.split(',')" ng-if="tech">
+                                    <a href="#">
+                                        <span class="label border-left-yellow label-striped content-group">{{tech}}</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <span ng-if="!member.technologies" class="no-value-field"><br/><br/>
+                                Nenhuma até então
+                            </span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

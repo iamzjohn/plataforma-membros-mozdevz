@@ -1,0 +1,84 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23-Mar-2017, 12:52:09
+    Author     : Romildo Cumbe <romildocumbe@gmail.com>
+*/
+
+
+.blink {
+  opacity : 0.4;  
+  transition: opacity 2s;
+  -webkit-transition: opacity 2s;
+}
+
+.blink2 { 
+  opacity: 0.6;
+  animation: blink-animation 1s steps(10, start) infinite;
+  -webkit-animation: blink-animation 1s steps(10, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    opacity : 0.7;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+       opacity : 0.2;
+  }
+}
+
+.blur {
+    -webkit-filter: blur(1px);
+      -moz-filter: blur(1px);
+      -o-filter: blur(1px);
+      -ms-filter: blur(1px);
+      filter: blur(1px);
+}
+
+.no-value-field { color: #c4b909; font-style:italic; }
+
+
+@-webkit-keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: placeHolderShimmer;
+  animation-name: placeHolderShimmer;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  background: #f6f7f8;
+  background: #eeeeee;
+  background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
+  background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  -webkit-background-size: 800px 104px;
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+}
+

@@ -1,0 +1,20 @@
+{
+    "elements": {
+        "list": {
+            "attributes": {
+                "per-page": {},
+                "postFetch": {},
+                "src": {},
+                "name": {},
+                "preFetch": {},
+                "repeat-element": {},
+                "each": {}
+            }
+        }
+    },
+    "attributes": {
+        "ajaxify": {
+            "context": "a"
+        }
+    }
+}

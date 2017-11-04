@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<app xmlns="http://hi-framework.org/XML/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://hi-framework.org/XML/1.1.0
+      http://hi-framework.org/xml/Schema_1_1_0.xsd">
+    
+    
+    <deployment-mode>DEVELOPMENT</deployment-mode>
+    <default-lang>pt</default-lang>
+    <web>
+        <welcome-url>members/index</welcome-url>
+    </web>
+       
+</app>

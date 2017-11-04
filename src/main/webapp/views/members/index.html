@@ -1,0 +1,191 @@
+<!-- Main sidebar -->
+
+<div class="sidebar sidebar-main sidebar-default">
+
+    <div class="sidebar-fixed">
+
+
+
+        <div class="sidebar-content">
+
+            <div class="panel panel-white" >
+
+                <div class="panel-heading">
+                    <div class="panel-title text-semibold">
+                        <i class="icon-search4 text-size-base position-left"></i>
+                        Pesquisar
+
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <form ng-submit="findMembers()">
+                            <div class="has-feedback has-feedback-left">
+                                <input type="search" ng-submit="findMembers()" class="form-control" id="keywords-filter" placeholder="keywords do nome..">
+                                <div class="form-control-feedback">
+                                    <i class="icon-keyboard text-size-large text-muted"></i>
+                                </div>
+                            </div>
+
+                        </form>    
+                    </div>
+
+                    <div class="form-group">
+                        <style>.token-label{text-transform: uppercase;}</style>
+                        <label class="text-muted">Tecnologias <br/><small style="font-size: 11px; color: #c4b909;"> Separe-as por vírgula</small></label>
+
+                        <input  type="text" id="technologies-filter" class="form-control tokenfield" value="">
+
+                    </div>
+
+                    <div>
+                        <div class="sidebar-category" style="margin-top: -17px;">
+                            <div class="category-title">
+                                <span>Outros Filtros</span>
+                                <ul class="icons-list">
+                                    <li><a href="#" data-action="collapse"></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="category-content" style="display: none;">
+                                <div>
+
+                                    <div class="form-group">
+                                        <div class="has-feedback has-feedback-left">
+                                            <select class="form-control" id="title-filter">
+                                                <option value=""> -- Todos Perfís</option>
+                                                <option ng-repeat="title in titles">{{title}}</option>
+                                            </select>
+                                            <div class="form-control-feedback">
+                                                <i class="icon-user-tie text-size-large text-muted"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="has-feedback has-feedback-left">
+                                            <select class="form-control" id="gender-filter">
+                                                <option value=""> -- Todos géneros</option>
+                                                <option ng-repeat="gender in genders">{{gender}}</option>
+                                            </select>
+                                            <div class="form-control-feedback">
+                                                <i class="icon-man-woman text-size-large text-muted"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="has-feedback has-feedback-left">
+                                            <select class="form-control" id="occupation-filter">
+                                                <option value=""> -- Todas ocupações</option>
+                                                <option ng-repeat="occupation in occupations">{{occupation}}</option>
+                                            </select>
+                                            <div class="form-control-feedback">
+                                                <i class="icon-design text-size-large text-muted"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="has-feedback has-feedback-left">
+                                            <select class="form-control" id="city-filter">
+                                                <option value=""> -- Todas moradas</option>
+                                                <option ng-repeat="city in cities" value="{{city.id}}">{{city.name}}</option>
+                                            </select>
+                                            <div class="form-control-feedback">
+                                                <i class="icon-home9 text-size-large text-muted"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+
+                    <button ng-click="findMembers()" ng-disabled="findingMembers || isFirstLoad" class="btn bg-success-800 btn-block members-find-btn">
+                        <span ng-if="!findingMembers">
+                            <i class="icon-search4 text-size-base position-left"></i>
+                            Encontrar membros
+                        </span>
+                        <span ng-if="findingMembers">
+                            <i class="icon-spinner4 spinner text-size-base position-left"></i>
+                            <em>Carregando..</em>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- /main sidebar -->
+
+
+<!-- Main content 24-->
+<div class="content-wrapper members-list-container" style="display: none;">
+    <list name="membersList" each="m" src="MembersFrontier.fetch" repeat-element=".member-row" preFetch="preListFecth(filter)" postFetch="postListFecth(result)" per-page="24">
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6 member-row">
+            <div class="thumbnail no-padding" style="min-height: 315px;">
+                <div class="thumb">
+                    <img aload="webroot/assets/images/loading.gif" asrc="{{m.imageUrl}}" err="webroot/assets/images/member.png" style="border-radius:none;" alt="">
+                    <div class="caption-overflow">
+                        <span>
+                            <a ng-click="viewProfile(m.username)" class=" btn-icon btn-xs"><i style="color: #f4e842;" class="icon-enter3"></i></a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="caption text-center" >
+                    <h6 class="text-semibold no-margin" >{{m.name}} <small class="display-block" style=" height: 20px; text-overflow: ellipsis-word; ">{{m.title}}</small></h6>
+                    <br/>
+                    <span class="label bg-grey-300">{{m.city.name}}</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" ng-show="$empty">
+        <center>
+            <br/>
+            <h1 style="font-size: 100px; font-weight: bold;">:(</h1>
+            <h1>A pesquisa não retornou nenhum membro!</h1>
+            <h5><em>trocar por foto nice</em></h5>
+            <br/>
+        </center>
+    </div> 
+    </list>
+</div>
+<!-- /main content -->
+
+
+
+<div class="content-wrapper loading-png-container">
+    <div class="row">
+
+        <div class="col-lg-3 col-md-6" data-ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8]">
+            <div class="thumbnail no-padding" style="height: 315px; ">
+                <div style="height: 185px; background-color: #ccc;"></div>
+
+                <br/>
+                <div class="animated-background" style="height: 13px; width: 120px; margin: 0 auto; "></div>
+                <br/>
+                <div class="animated-background" style="height: 12px; width: 160px; margin: 0 auto;"></div>
+                <br/>
+                <div class="animated-background" style="height: 17px; width: 60px; margin: 0 auto;"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
