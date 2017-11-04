@@ -5,6 +5,7 @@
  */
 package data.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,11 +27,20 @@ public class User extends GenericEntity {
     @Column
     private String password;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
     private Member member;
 
     private Boolean isGuest;
+
+    public User() {
+        this.username = "";
+        this.password = "";
+        this.member = new Member();
+        this.isGuest = false;
+    }
+    
+    
 
     public Long getId() {
         return id;

@@ -22,6 +22,12 @@ public class City extends GenericEntity{
     private Long id;
 
     private String name;
+
+    public City() {
+        this.name = "";
+    }
+    
+    
   
 
     public Long getId() {

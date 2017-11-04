@@ -36,7 +36,7 @@ public class UserService {
         session.invalidate();
     }
 
-    public boolean autehticate(String username, String pass) throws Exception {
+    public boolean authenticate(String username, String pass) throws Exception {
         
         User usr = userDAO.findUserWithCredentials(username, genericUtil.getMD5(pass));
         
@@ -68,5 +68,7 @@ public class UserService {
         user.setPassword(genericUtil.getMD5(user.getPassword()));
         userDAO.create(user);
     }
+
+  
 
 }

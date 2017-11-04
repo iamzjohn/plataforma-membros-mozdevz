@@ -30,7 +30,7 @@ public class SmartAuthProvider implements AuthComponent {
     public boolean doLogin(String username, String pass){ 
     
         try {
-            return userService.autehticate(username, pass);
+            return userService.authenticate(username, pass);
         } catch (Exception ex) {
             Logger.getLogger(SmartAuthProvider.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,6 +1,7 @@
 package data.model;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,7 +37,7 @@ public class Member extends GenericEntity{
     private String gender;
     
     @NotNull
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private City city;
     
@@ -76,6 +77,30 @@ public class Member extends GenericEntity{
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthday;
+
+    public Member() {
+        this.name = "";
+        this.username = "";
+        this.title = "";
+        this.imageUrl = "webroot/assets/images/demo/users/face11.jpg";
+        this.gender = "";
+        this.city = new City();
+        this.email = "";
+        this.phone = "";
+        this.perferibleFormOfContact = "";
+        this.technologies = "";
+        this.facebook = "";
+        this.twitter = "";
+        this.instagram = "";
+        this.github = "";
+        this.stackoverflow = "";
+        this.linkedIn = "";
+        this.website = "";
+        this.occupation = "";
+        this.birthday = new Date();
+    }
+    
+    
 
     public Long getId() {
         return id;
