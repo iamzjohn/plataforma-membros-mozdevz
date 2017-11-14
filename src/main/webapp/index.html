@@ -16,7 +16,7 @@
         <link href="webroot/assets/css/custom.css" rel="stylesheet" type="text/css">
         <link href="webroot/assets/css/components.css" rel="stylesheet" type="text/css">
         <link href="webroot/assets/css/colors.css" rel="stylesheet" type="text/css">
-        <link href="webroot/assets/css/bootstrap_multiselect.min.css" rel="stylesheet" type="text/css">
+        <!--<link href="webroot/assets/css/bootstrap_multiselect.min.css" rel="stylesheet" type="text/css">-->
         <!-- /global stylesheets -->
 
         <!-- Core JS files -->
@@ -40,15 +40,30 @@
         <script type="text/javascript" src="webroot/assets/js/plugins/forms/styling/switchery.min.js"></script>
         <script type="text/javascript" src="webroot/assets/js/plugins/forms/styling/uniform.min.js"></script>
         <!--<script type="text/javascript" src="webroot/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>-->
-        <script type="text/javascript" src="webroot/assets/js/plugins/forms/selects/bootstrap-multiselect-v2.js"></script>
-        <script type="text/javascript" src="webroot/assets/js/plugins/forms/selects/select2.min.js"></script>
+        <!--<script type="text/javascript" src="webroot/assets/js/plugins/forms/selects/select2.min.js"></script>-->
         <script type="text/javascript" src="webroot/assets/js/plugins/ui/moment/moment.min.js"></script>
-        <script type="text/javascript" src="webroot/assets/js/plugins/pickers/daterangepicker.js"></script>
-        <script type="text/javascript" src="webroot/assets/js/plugins/pickers/pickadate/picker.js"></script>
+        <!--<script type="text/javascript" src="webroot/assets/js/plugins/pickers/daterangepicker.js"></script>-->
+        <!--<script type="text/javascript" src="webroot/assets/js/plugins/pickers/pickadate/picker.js"></script>-->
 
         <script type="text/javascript" src="webroot/assets/js/core/app.js"></script>
         <script type="text/javascript" src="webroot/assets/js/pages/layout_sidebar_sticky_custom.js"></script>
         <!-- /theme JS files -->
+
+        <!--extra plugins-->
+        
+        <!--BOOTSTRAP MULTI SELECT-->
+        <!--<link href="webroot/plugins/nootstrap-multiselect/css/bootstrap_multiselect.css" rel="stylesheet" type="text/css">-->
+        <script type="text/javascript" src="webroot/plugins/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+        
+        <!--PICKADATEJS-->
+        <script type="text/javascript" src="webroot/plugins/pickadatejs/picker.js"></script>
+        <script type="text/javascript" src="webroot/plugins/pickadatejs/picker.date.js"></script>
+        
+        <!--SELECT2-->
+        <link href="webroot/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="webroot/plugins/select2/js/select2.full.min.js"></script>
+        
+        <!--/extra plugins--> 
 
     </head>
 
@@ -70,10 +85,10 @@
                 <div class="navbar-collapse collapse navbar-right" id="navbar-mobile">
 
                     <ul class="nav navbar-nav navbar-nav-material">
-<!--
-                        <li ng-class="{'active':currentController=='announcements'}">
-                            <a href="announcements/index" ajaxify>ANÚNCIOS</a>
-                        </li>-->
+                        <!--
+                                                <li ng-class="{'active':currentController=='announcements'}">
+                                                    <a href="announcements/index" ajaxify>ANÚNCIOS</a>
+                                                </li>-->
                         <li ng-class="{'active':currentController == 'members'}">
                             <a href="members/index" ajaxify>MEMBROS</a>
                         </li>
@@ -95,12 +110,12 @@
                                     <span data-toggle="modal" data-target="#modal-login" style="color: black;"><b>LOGIN/REGISTRO</b></span>
                                 </a>
 
-<!--                                <ul class="dropdown-menu dropdown-menu-right">
-                                        <li><a href="members/profile" ajaxify><i class="icon-user"></i> Perfil de Membro</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="user/change-password" ajaxify><i class="icon-cog5"></i> Trocar Senha</a></li>
-                                        <li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
-                                </ul>-->
+                                <!--                                <ul class="dropdown-menu dropdown-menu-right">
+                                                                        <li><a href="members/profile" ajaxify><i class="icon-user"></i> Perfil de Membro</a></li>
+                                                                        <li class="divider"></li>
+                                                                        <li><a href="user/change-password" ajaxify><i class="icon-cog5"></i> Trocar Senha</a></li>
+                                                                        <li><a href="#"><i class="icon-switch2"></i> Logout</a></li>
+                                                                </ul>-->
                             </li>
                         </ul>
                     </div>
@@ -213,9 +228,9 @@
 
                         <div class="content-divider text-muted form-group"><span>Não tem uma conta membro?</span></div>
                         <!--<a target='_blank' href="https://docs.google.com/forms/d/e/1FAIpQLSehr_B9CC_n8LIjm1bVMMYtE46Cc_m6DN7Ss48QFgFAiymK3A/viewform" class="btn btn-default btn-block content-group">Inscrever-se</a>-->
-                        <a href="user/registration" ajaxify class="btn btn-default btn-block content-group">Inscrever-se</a>
-                        
-                        
+                        <a href="user/registration" ajaxify class="btn btn-default btn-block content-group" data-dismiss="modal">Inscrever-se</a>
+
+
                         <!--<span data-target="#register-login" class="btn btn-default btn-block content-group">Inscrever-se</span>-->
                         <span class="help-block text-center no-margin">Ao entrar, voce estara a concordar com os nossos <a href="#">Termos &amp; Condições</a> e a nossa <a href="#">Política de Cookies</a></span>
                     </form>
@@ -349,7 +364,7 @@
                             <button type="submit" class="btn bg-success-700 btn-block">Registrar Me <i class="icon-arrow-right14 position-right"></i></button>
                         </div>
 
-                       </form>
+                    </form>
                     <!-- /form -->
 
                 </div>

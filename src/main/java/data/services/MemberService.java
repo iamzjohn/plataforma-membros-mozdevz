@@ -63,7 +63,7 @@ public class MemberService{
             
             //============= Filter by Keywords : WHERE USED HERE
             String keywords = filter.get("keywords").toString();
-            if(!keywords.isEmpty()){
+            if(!keywords.isEmpty() && !keywords.equalsIgnoreCase("")){
                 keywords = keywords.replace(",", " ");
                 String[] keywordPieces = keywords.split(" ");
                 
@@ -103,7 +103,7 @@ public class MemberService{
             //============= Filter by technologies
             String technologiesBruteString = filter.get("technologies").toString();
             
-            if(!technologiesBruteString.isEmpty()){
+            if(!technologiesBruteString.isEmpty() && !technologiesBruteString.equalsIgnoreCase("")){
                 
                 String[] technologies = technologiesBruteString.split(",");
                 
@@ -137,7 +137,7 @@ public class MemberService{
                 
                 String value = filter.get(currentFilterFiled).toString();
             
-                if(!value.isEmpty()){
+                if(!value.isEmpty() && !value.equalsIgnoreCase("")){
 
                     //add AND/WHERE
                     if(whereUsed){query += " AND ";}else{ query += " WHERE "; whereUsed = true; }
@@ -157,7 +157,7 @@ public class MemberService{
             //=============== Filter by city
             String city = filter.get("city").toString();
             
-                if(!city.isEmpty()){
+                if(!city.isEmpty() && !city.equalsIgnoreCase("")){
 
                     //add AND/WHERE
                     if(whereUsed){query += " AND ";}else{ query += " WHERE "; whereUsed = true; }

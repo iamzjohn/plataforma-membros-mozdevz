@@ -5,19 +5,8 @@ Hi.view(function (_) {
         initScroll();
         $('.tokenfield').tokenfield();
         _.isFirstLoad = true;
-
-//        callMembers();
     }
 
-//    function callMembers(){
-////        MembersFrontier.getAllMembers().try(function(result){
-//        MembersFrontier.fetch(1, 24, {"keywords": "", "technologies" : ""} ,{}).try(function(result){
-//           _.members_aux = result;
-//           _.$apply();
-//       });
-//    }
-
-//    _.callFrontier = callMembers();
 
     _.viewProfile = function (username) {
         Hi.redirect("members/profile?id=" + username);
@@ -31,12 +20,35 @@ Hi.view(function (_) {
 
     _.preListFecth = function (filter) {
         filter.keywords = $('#keywords-filter').val();
+        if(filter.keywords == undefined){
+            filter.keywords = '';
+        }
+        
         filter.technologies = $('#technologies-filter').val();
+        if(filter.technologies == undefined){
+            filter.technologies = '';
+        }
 
         filter.title = $('#title-filter').val();
+        if(filter.title == undefined){
+            filter.title = '';
+        }
+        
         filter.gender = $('#gender-filter').val();
-        filter.occupation = $('#occupation-filter').val();
+        if(filter.gender == undefined){
+            filter.gender = '';
+        }
+        
         filter.city = $('#city-filter').val();
+        if(filter.city == undefined){
+            filter.city = '';
+        }
+        
+        filter.occupation = $('#occupation-filter').val();
+        if(filter.occupation == undefined){
+            filter.occupation = '';
+        }
+        
         console.log(filter);
         _.showLoader();
     }

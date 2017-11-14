@@ -9,6 +9,10 @@ import auth.SmartAuthProvider;
 import data.model.Member;
 import data.model.User;
 import data.services.UserService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
@@ -24,63 +28,43 @@ import org.emerjoin.hi.web.meta.Frontier;
 @Frontier
 @ApplicationScoped
 public class UserFrontier {
-    
+
     @Inject
     private UserService userService;
-    
+
     @Inject
     private SmartAuthProvider auth;
-    
+
     @Inject
     private ActiveUser activeUser;
-    
+
     public void logout() {
         userService.logout();
     }
-    
-    public boolean addUser(User user, Member member) {
-//        user.setMember(member);
 
-        User userAux = new User();
-        userAux.setIsGuest(user.getIsGuest());
-        userAux.setUsername(user.getUsername());
-        userAux.setPassword(user.getPassword());
-        
-        Member memberAux = new Member();
-        memberAux.setBirthday(member.getBirthday());
-        memberAux.setCity(member.getCity());
-        memberAux.setEmail(member.getEmail());
-        memberAux.setFacebook(member.getFacebook());
-        memberAux.setGender(member.getGender());
-        memberAux.setGithub(member.getGithub());
-        memberAux.setImageUrl(member.getImageUrl());
-        memberAux.setInstagram(member.getInstagram());
-        memberAux.setLinkedIn(member.getLinkedIn());
-        memberAux.setName(member.getName());
-        memberAux.setOccupation(member.getOccupation());
-        memberAux.setPerferibleFormOfContact(member.getPerferibleFormOfContact());
-        memberAux.setPhone(member.getPhone());
-        memberAux.setTechnologies(member.getTechnologies());
-        memberAux.setTitle(member.getTitle());
-        memberAux.setTwitter(member.getTwitter());
-        memberAux.setUsername(user.getUsername());
-        memberAux.setWebsite(member.getWebsite());
-        
-        userAux.setMember(memberAux);
-        
-        System.out.println(userAux);
-//        try {
-//            userService.register(user);
-//            System.out.println(user);
-////            boolean authorized = auth.doLogin(user.getUsername(), user.getPassword());
-////            if (authorized == false) {
-////                return authorized;
-////            }
-//            return true;
-//        } catch (Exception ex) {
-//            Logger.getLogger(UserFrontier.class.getName()).log(Level.SEVERE, null, ex);
-        return false;
-//        }
+    public boolean login(String username, String password) {
+        boolean authorized = auth.doLogin(username, password);
+        return authorized;
     }
-    
+
+    public boolean addUser(User user, Member member) {
+
+        /**
+         * SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); Date
+         * myDate = new Date(); try { myDate = sdf.parse(member_birthdate); }
+         * catch (ParseException ex) { ex.printStackTrace();
+         * System.out.println("Falha ao tentar fazer parse da
+         * data".toUpperCase()); return false; } member.setBirthday(myDate);
+         */
+        user.setMember(member);
+        user.setIsGuest(true);
+        try {
+            userService.register(user);
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(UserFrontier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }

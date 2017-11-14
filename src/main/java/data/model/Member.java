@@ -70,6 +70,8 @@ public class Member extends GenericEntity{
     
     private String website;
     
+    private String about;
+    
     
     //STUDENT or WORKER
     @NotNull
@@ -98,6 +100,7 @@ public class Member extends GenericEntity{
         this.website = "";
         this.occupation = "";
         this.birthday = new Date();
+        this.about =  "";
     }
     
     
@@ -260,6 +263,14 @@ public class Member extends GenericEntity{
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     

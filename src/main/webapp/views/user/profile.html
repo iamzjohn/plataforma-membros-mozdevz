@@ -18,11 +18,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Username</label>
-                            <input type="text" value="Eugene" class="form-control">
+                            <input type="text" value="Eugene" class="form-control" readonly="" ng-model="memberInfo.username">
                         </div>
                         <div class="col-md-6">
                             <label>Nome Completo</label>
-                            <input type="text" value="Kopyov" class="form-control">
+                            <input type="text" value="Kopyov" class="form-control" ng-model="memberInfo.name">
                         </div>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Email</label>
-                            <input type="text" readonly="readonly" value="eugene@kopyov.com" class="form-control">
+                            <input type="text" readonly="readonly" ng-model="memberInfo.email" class="form-control">
                         </div>
                         <div class="col-md-6">
                             <label>Morada Actual</label>
-                            <input type="text" value="Ring street 12" class="form-control">
+                            <input type="text" value="Ring street 12" class="form-control" ng-model="memberInfo.city.name">
                         </div>
                     </div>
                 </div>
@@ -44,11 +44,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Tel.:</label>
-                            <input type="text" value="+99-99-9999-9999" class="form-control">
+                            <input type="text" value="+99-99-9999-9999" class="form-control" ng-model="memberInfo.phone">
                         </div>
                         <div class="col-md-6">
                             <label>Género</label>
-                            <select class="select">
+                            <select class="select" ng-model="memberInfo.gender">
                                 <option value="germany" selected="selected">--Selecione--</option>
                                 <option value="france">Feminino</option>
                                 <option value="spain">Masculino</option>
@@ -61,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label>Ocupação</label>
-                            <select class="select">
+                            <select class="select" ng-model="memberInfo.occupation">
                                 <option value="select" selected="selected">--Selecione--</option>
                                 <option value="estudante">Estudante</option>
                                 <option value="trabalhador">Trabalhador</option>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-md-6">
                             <label>Dominio da Lingua Inglesa</label>
-                            <select class="select">
+                            <select class="select" ng-model="memberInfo">
                                 <option value="select" selected="selected">--Selecione--</option>
                                 <option value="basico">Básico</option>
                                 <option value="intermedio">Intermédio</option>
