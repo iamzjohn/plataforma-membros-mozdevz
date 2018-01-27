@@ -17,6 +17,10 @@ Hi.template({
          SP_logout();
         
     },
+    
+    login : function(username, password){
+        SP_credentials_login(username, password);
+    },
 
     //when the first view is loaded
     $startup : function(){

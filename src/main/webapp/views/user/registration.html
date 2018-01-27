@@ -18,10 +18,12 @@
                                 </div>
 
                                 <div class="form-group has-feedback">
+                                     
                                     <input class="form-control" placeholder="Escolha um Username" type="text" ng-model="novo_user.username">
                                     <div class="form-control-feedback">
                                         <i class="icon-user-plus text-muted"></i>
                                     </div>
+                                    <span class="pull-right" style="color: red;">*<small>O username não pode conter espaços, separe or underscores(_) ou iféns(-)</small></span>
                                 </div>
 
                                 <div class="row">
@@ -67,7 +69,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <input class="form-control" placeholder="Email" type="email" ng-model="novo_member.email">
+                                            <input class="form-control" placeholder="Email" type="email" ng-model="email">
                                             <div class="form-control-feedback">
                                                 <i class="icon-mention text-muted"></i>
                                             </div>
@@ -75,11 +77,14 @@
                                     </div>
 
                                     <div class="col-md-6">
-
+                                        <div>
+                                            Data de Nascimento
+                                        </div>
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="icon-calendar5"></i></span>
-                                            <input class="form-control pickadate picker__input picker__input--active" placeholder="Data de Nascimento" readonly="" id="birthdate" aria-haspopup="true" aria-expanded="true" aria-readonly="false" aria-owns="P590402406_root" type="text" ng-model="novo_member.birthday">
+                                            <input class="form-control pickadate picker__input picker__input--active" placeholder="Data de Nascimento" readonly="" id="birthdate" aria-haspopup="true" aria-expanded="true" aria-readonly="false" aria-owns="P590402406_root" type="text">
                                         </div>
+
                                     </div>
                                 </div>
 
@@ -87,7 +92,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <input class="form-control" placeholder="Nr. Celular" type="number" ng-model="novo_member.phone">
+                                            <input class="form-control" placeholder="Nr. Celular" type="number" ng-model="phone">
                                             <div class="form-control-feedback">
                                                 <i class="icon-user-lock text-muted"></i>
                                             </div>
@@ -96,8 +101,8 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <select class="form-control" id="city-filter" ng-model="novo_member.city">
-                                                <option ng-repeat="city in cities" value="{{city}}">{{city.name}}</option>
+                                            <select class="form-control" id="city-filter" ng-model="city_id">
+                                                <!--                                                <option ng-repeat="city in cities" value="{{city}}">{{city.name}}</option>-->
                                             </select>
                                             <div class="form-control-feedback">
                                                 <i class="icon-user-lock text-muted"></i>
@@ -110,7 +115,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group has-feedback">
-                                            <input class="form-control" placeholder="Tecnologias/Plataformas/Software usados no teu dia-a-dia" type="text" ng-model="novo_member.technologies">
+                                            <input class="form-control" placeholder="Tecnologias/Plataformas/Software usados no teu dia-a-dia" type="text" ng-model="technologies">
                                             <div class="form-control-feedback">
                                                 <i class="icon-user-lock text-muted"></i>
                                             </div>
@@ -119,21 +124,8 @@
                                     </div>
                                 </div>
 
-                                <!--                                <div class="form-group">
-                                                                    <div class="checkbox">
-                                                                        <label>
-                                                                            <div class="checker"><span class="checked"><input class="styled" checked="checked" type="checkbox"></span></div>
-                                                                            Send me <a href="#">test account settings</a>
-                                                                        </label>
-                                                                    </div>
-                                
-                                                                    <div class="checkbox">
-                                                                        <label>
-                                                                            <div class="checker"><span class="checked"><input class="styled" checked="checked" type="checkbox"></span></div>
-                                                                            Subscribe to monthly newsletter
-                                                                        </label>
-                                                                    </div>
-                                
+                                <!--                               <div class="form-group">
+                                                                    
                                                                     <div class="checkbox">
                                                                         <label>
                                                                             <div class="checker"><span><input class="styled" type="checkbox"></span></div>
@@ -141,7 +133,7 @@
                                                                         </label>
                                                                     </div>
                                                                 </div>-->
-                                
+
                                 <div style="margin-top: 30px"></div>
                                 <div class="clearfix">
                                     <button data-toggle="modal" data-target="#modal-login" class="btn btn-default pull-left"> Efectuar Login </button>

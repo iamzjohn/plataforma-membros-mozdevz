@@ -23,6 +23,7 @@ import org.emerjoin.hi.web.mvc.exceptions.MvcException;
 /**
  *
  * @author Romildo Cumbe
+ * @author Adelino Jose 
  */
 @ApplicationScoped
 public class User extends Controller {
@@ -64,8 +65,8 @@ public class User extends Controller {
         filterData.put("genders", memberService.getGenders());
         filterData.put("occupations", memberService.getOccupations());
         filterData.put("cities", memberService.getCities());
+        
         filterData.put("novo_user", new data.model.User());
-
         filterData.put("novo_member", new Member());
 
         this.callView(filterData);

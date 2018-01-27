@@ -6,7 +6,7 @@ Hi.view(function(_){
     }
     
     _.memberProfile = function(username){
-        Hi.redirect("members/profile?id="+username);
+//        Hi.redirect("members/profile?id="+username);
     }
     
     

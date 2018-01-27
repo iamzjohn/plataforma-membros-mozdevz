@@ -61,5 +61,9 @@ public class MembersFrontier {
         return HiList.listEncode(rows, totalMachedRows, pageNumber, itemsPerPage);
 
     }
+    
+    public boolean updateMember(Member member){
+        return memberService.updateData(member);
+    }
 
 }

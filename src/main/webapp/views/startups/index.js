@@ -48,7 +48,7 @@ Hi.view(function (_) {
         Hi.redirect("startups/profile?id=" + username);
     }
     _.memberProfile = function (username) {
-        Hi.redirect("members/profile?id=" + username);
+//        Hi.redirect("members/profile?id=" + username);
     }
 
     _.findStartups = function () {

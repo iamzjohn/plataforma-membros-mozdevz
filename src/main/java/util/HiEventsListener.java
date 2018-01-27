@@ -14,23 +14,72 @@ import data.services.UserService;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.event.Observes;
+import org.emerjoin.hi.web.ActiveUser;
+import org.emerjoin.hi.web.FrontEnd;
+import org.emerjoin.hi.web.RequestContext;
+import org.emerjoin.hi.web.events.TemplateLoadEvent;
+import org.emerjoin.hi.web.events.TemplateTransformEvent;
 
 /**
  *
- * @author Romildo Cumbe
+ * @author Adelino José Ngomacha
  */
 @ApplicationScoped
 //public class HiEventsListener implements TemplateLoadListener, ControllerCallsListener, FrontierCallsListener {
 public class HiEventsListener {
 
-//    @Inject
-//    private FrontEnd frontEnd;
-//    
-//    @Inject UserService userService;
-//    
-//    @Inject RequestContext requestContext;
-//    
-//    
+    @Inject
+    private ActiveUser activeUser;
+    
+    @Inject
+    private FrontEnd frontEnd;
+    
+    @Inject UserService userService;
+    
+    @Inject RequestContext requestContext;
+    
+    public void onTemplateLoad(@Observes TemplateLoadEvent event) {
+
+         Map<String,Object> map = new HashMap<>();
+         //add some cool stuff to the map
+      
+         frontEnd.setTemplateData(map);           
+        
+    }
+    
+    public void changeTemplate(@Observes TemplateTransformEvent transformEvent){
+
+        // Examples of how to explore this event
+
+        //Adding DOM elements right after the body tag
+//        transformEvent.getTemplate().appendJS("webroot/the/path/to/script.js"); 
+//        transformEvent.getTemplate().appendCSS("webroot/the/path/to/style.css"); 
+//        transformEvent.getTemplate().append("<tag>content</tag>");
+        
+        //Adding DOM Elements right inside the <head> element.
+//        transformEvent.getTemplate().prepend("<tag>content</tag>");
+//        transformEvent.getTemplate().prependCSS("webroot/the/path/to/style.css")
+//        transformEvent.getTemplate().prependJS("webroot/the/path/to/script.js");
+        
+        //Replacing the template HTML by a completely different one.
+//        transformEvent.getTemplate().setMarkup("<html>Your new markup</html>");
+    }
+    
+     public void templateLoad(@Observes TemplateLoadEvent event){
+            
+               UserInfo info = new UserInfo(); //fetch user data;
+               User usr = (User) activeUser.getProperty("user");
+               Map data = new HashMap();
+               if(usr != null){
+                  info.setUser(usr);
+                  info.setAutorized((boolean) activeUser.getProperty("authorized"));
+               }
+               data.put("userInfo",info);        
+               frontEnd.setTemplateData(data); 
+         }    
+    
+    
 //    public void onTemplateLoad() {
 //        
 //           /* Map tdata = new HashMap();

@@ -6,10 +6,10 @@
 package frontiers;
 
 import auth.SmartAuthProvider;
+import data.model.City;
 import data.model.Member;
 import data.model.User;
 import data.services.UserService;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -31,6 +31,7 @@ public class UserFrontier {
 
     @Inject
     private UserService userService;
+    
 
     @Inject
     private SmartAuthProvider auth;
@@ -47,15 +48,27 @@ public class UserFrontier {
         return authorized;
     }
 
-    public boolean addUser(User user, Member member) {
+    public boolean addUser(User user, Member member, Map extra_data) {
+        
+        long city_id = Integer.parseInt(extra_data.get("city_id").toString());
+        System.out.println("City ID has: " + city_id);
+        City city = new City();
+        city.setId(city_id);
+        member.setCity(city);
+        
+        String member_birthdate = extra_data.get("birthdate").toString();
 
-        /**
-         * SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); Date
-         * myDate = new Date(); try { myDate = sdf.parse(member_birthdate); }
-         * catch (ParseException ex) { ex.printStackTrace();
-         * System.out.println("Falha ao tentar fazer parse da
-         * data".toUpperCase()); return false; } member.setBirthday(myDate);
-         */
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date myDate = new Date();
+        try {
+            myDate = sdf.parse(member_birthdate);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Falha ao tentar fazer parse da data".toUpperCase());
+            return false;
+        }
+        member.setBirthday(myDate);
+
         user.setMember(member);
         user.setIsGuest(true);
         try {
@@ -66,5 +79,6 @@ public class UserFrontier {
         }
         return false;
     }
+    
 
 }

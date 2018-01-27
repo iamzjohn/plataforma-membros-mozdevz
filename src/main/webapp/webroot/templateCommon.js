@@ -30,7 +30,13 @@ function SP_startup() {
 function SP_login(app) {
     var data;
     UserFrontier.getStateForAuth(app).try(function (result) {
-        data = result;        
+        data = result;
+    });
+}
+
+function SP_credentials_login(username, password) {
+    UserFrontier.login(username, password).try(function (result) {
+        console.log(result);
     });
 }
 

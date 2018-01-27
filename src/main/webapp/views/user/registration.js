@@ -4,65 +4,77 @@ Hi.view(function (_) {
     _.senha = '';
     _.senha_confirmation = '';
 
-
-
     _.$postLoad = function () {
-//        $('#birthdate').select2();
-        _.time = new Date(_.novo_member.birthday);
-        _.novo_member.birthday = _.time.toLocaleDateString('en-GB');
 
         $('#birthdate').pickadate({
-            format: 'dd/mm/yyyy'
+            format: 'dd/mm/yyyy',
+            max: new Date(),
+            selectMonths: true,
+            selectYears: 70
         });
-        $('#city-filter').multiselect({enableFiltering: true, filterPlaceholder: 'Procure pela cidade...'});
-        $('#title-filter').multiselect({
-            enableFiltering: true,
-            includeSelectAllOption: true,
-            disableIfEmpty: true,
-            disabledText: 'Titulos existentes',
-            filterPlaceholder: 'Procure pelo Perfil...'
+        
+        var cidades = sanitize_data(_.cities);
+        $('#city-filter').multiselect('dataprovider', cidades);
+        $('#city-filter').multiselect({
+            enableFiltering: true, 
+            filterPlaceholder: 'Procure pela cidade...', 
+            disableIfEmpty: true
         });
+        
+        $('span.multiselect-native-select div').hide();
+    }
 
+    function sanitize_data(info) {
+        var returned_data = [];
+        info.forEach(function (item) {
+            returned_data.push({
+                label: item.name,
+                value: item.id
+            });
+        });
+        return returned_data;
     }
 
     _.flushOnServer = function () {
+
         var can_save = true;
         if (_.senha != _.senha_confirmation && _.senha.length > 5) {
             can_save = false;
-            alert("Senhas Diferentes");
+            swal("Error!", "Senhas Diferentes!", "error");
         } else {
             _.novo_user.password = _.senha;
-            
+
             if (can_save) {
                 save();
             } else {
-                alert("User nao é valido");
+                swal("Error!", "User não é valido!", "error");
             }
         }
-
-
-
     }
 
     function save() {
+
         _.novo_member.username = _.novo_user.username;
         _.novo_member.name = _.nome + " " + _.apelido;
-        _.novo_member.birthday = new Date(_.novo_member.birthday);
+        var member_birthdate = $("#birthdate").val() + '';
 
-        UserFrontier.addUser(_.novo_user, _.novo_member).try(function (result) {
-            alert(result);
+        var extra_data = {
+            birthdate: member_birthdate,
+            city_id: _.city_id
+        };
+
+        UserFrontier.addUser(_.novo_user, _.novo_member, extra_data).try(function (result) {
             if (result) {
-                alert("Membro Registrado com Sucesso");
+             swal("Parabens!", "User Registrado com Sucesso!!!", "success"); 
                 UserFrontier.login(_.novo_user.username, _.novo_user.password).try(function (result) {
                     if (result) {
-                        Hi.redirect("user/profile");
+                        Hi.redirect("user/profile?username=" + _.novo_user.username);
                     } else {
-                        alert("Falha, por favor tente fazer o login");
+                        swal("Error!", "Falha, por favor tente fazer o login!", "error");
                     }
                 });
-                Hi.redirect("user/profile?username=" + _.novo_user.username);
             } else {
-                alert("Falha ao tentar Gravar Usuario");
+                swal("Error!", "Falha, Erro no servidor a tentar gravar dados!", "error");
             }
         });
     }

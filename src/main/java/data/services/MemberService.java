@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -46,6 +48,16 @@ public class MemberService{
     
     public List<Member> getAllMembers() throws Exception{
         return memberDAO.getAll();
+    }
+    
+    public boolean updateData(Member member){
+        try {
+            memberDAO.update(member);
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(MemberService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     public Map fetch(int pageNumber, int itemsPerPage, Map filter, Map ordering) throws Exception {

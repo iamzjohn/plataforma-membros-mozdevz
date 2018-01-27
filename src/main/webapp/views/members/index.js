@@ -9,7 +9,7 @@ Hi.view(function (_) {
 
 
     _.viewProfile = function (username) {
-        Hi.redirect("members/profile?id=" + username);
+//        Hi.redirect("members/profile?id=" + username);
     }
 
     _.findMembers = function () {

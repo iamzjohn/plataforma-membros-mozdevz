@@ -14,22 +14,24 @@
         <div class="navbar-right">
             <ul class="nav navbar-nav">
                 <li ng-if="member.website"><a href="{{member.website}}" target="_blank"><i class="icon-earth position-left"></i> </a></li>
-                <li ng-if="member.facebook"><a href="{{member.facebook}}" target="_blank"><i class="icon-facebook2 position-left"></i> </a></li>
+<li ng-if="member.facebook"><a href="{{member.facebook}}" target="_blank"><i class="icon-facebook2 position-left"></i> </a></li>
                 <li ng-if="member.instagram"><a href="{{member.instagram}}" target="_blank"><i class="icon-instagram position-left"></i> </a></li>
                 <li ng-if="member.twitter"><a href="{{member.twitter}}" target="_blank"><i class="icon-twitter2 position-left"></i> </a></li>
                 <li ng-if="member.github"><a href="{{member.github}}" target="_blank"><i class="icon-github position-left"></i> </a></li>
                 <li ng-if="member.stackoverflow"><a href="{{member.stackoverflow}}" target="_blank"><i class="icon-stackoverflow position-left"></i> </a></li>
                 <li ng-if="member.linkedIn"><a href="{{member.linkedIn}}" target="_blank"><i class="icon-linkedin position-left"></i> </a></li>
-                <!--<li class="dropdown">
+
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-gear"></i> <span class="visible-xs-inline-block position-right"> Options</span> <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a href="#"><i class="icon-image2"></i> Editar foto de perfil</a></li>
-                        <li><a href="#"><i class="icon-clippy"></i> Editar dados</a></li>
-                        <li><a href="#"><i class="icon-lan2"></i> Editar redes sociais</a></li>
+                        <li><a href="#" class="text-grey disabled"><i class="icon-image2"></i> Editar foto de perfil</a></li>
+                        <li><a href="#" class="text-grey disabled"><i class="icon-clippy"></i> Editar dados</a></li>
+                        <li data-toggle="modal" data-target="#modal-social-links"><a href="#"><i class="icon-lan2"></i> Editar redes sociais</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="icon-trash"></i> Eliminar conta</a></li>
+                        <li><a href="#" class="text-grey disabled"><i class="icon-trash"></i> Eliminar conta</a></li>
                     </ul>
-                </li>-->
+                </li>
+
             </ul>
         </div>
     </div>
@@ -46,109 +48,109 @@
 
                     <list name="startupsList" each="s" src="StartupsFrontier.fetchFromMember" repeat-element=".startup-row" preFetch="preListFecth(filter)" postFetch="postListFecth(result)" per-page="5">
                     <div class="row startup-row" style="padding-right: 25px; padding-left: 25px;">
-                                            <div class="panel media-list content-group startups-list-container">
-							<div class="panel-body ">
+                        <div class="panel media-list content-group startups-list-container">
+                            <div class="panel-body ">
 
 
-                                                                        <div class="media-left">
-                           <a ng-click='startupProfile(s.startup.username)'>
-                               <img aload="webroot/assets/images/loading.gif" asrc="{{s.startup.imageUrl}}" err="webroot/assets/images/startup.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
-                           </a>
-                           <br/><br/>
-                       </div>
+                                <div class="media-left">
+                                    <a ng-click='startupProfile(s.startup.username)'>
+                                        <img aload="webroot/assets/images/loading.gif" asrc="{{s.startup.imageUrl}}" err="webroot/assets/images/startup.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                                    </a>
+                                    <br/><br/>
+                                </div>
 
-                       <div class="media-body">
-                           <h6 class="media-heading text-semibold">
-                               <a style="color: #333; font-weight: bold;" ng-click='startupProfile(s.startup.username)' >{{s.startup.name}}</a>
-                           </h6>
+                                <div class="media-body">
+                                    <h6 class="media-heading text-semibold">
+                                        <a style="color: #333; font-weight: bold;" ng-click='startupProfile(s.startup.username)' >{{s.startup.name}}</a>
+                                    </h6>
 
-                           <ul class="list-inline list-inline-separate text-muted mb-10">
-                               <li><a style="color: #999; cursor: default;">{{s.startup.slogan}}</a></li>
-                           </ul>
-                           {{s.startup.description.substring(0,150)}}<span ng-show='s.startup.description.length > 150'>..</span>
-
-
-                           <br/><br/>
-
-                           <div><small class="text-muted">Liderada por : <a ng-click="memberProfile(s.startup.CEO.username)">{{s.startup.CEO.name}}</a></small></div>
-                       </div>
-
-                       <div class="media-right text-nowrap">
-                           <p><span class="heading-text pull-right">
-                                   <i ng-class="s.startup.rating >= 1 ? 'icon-star-full2' : (s.startup.rating > 0 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
-
-                                   <i ng-class="s.startup.rating >= 2 ? 'icon-star-full2' : (s.startup.rating > 1 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
-
-                                   <i ng-class="s.startup.rating >= 3 ? 'icon-star-full2' : (s.startup.rating > 2 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
-
-                                   <i ng-class="s.startup.rating >= 4 ? 'icon-star-full2' : (s.startup.rating > 3 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
-
-                                   <i ng-class="s.startup.rating >= 5 ? 'icon-star-full2' : (s.startup.rating > 4 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
-
-                                   <span class="text-muted position-right">({{s.startup.rating}})</span>
-                               </span>
-                           </p>
-                           <br/>
-                           <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.startup.members_qty}} membros</span>
-
-                           <br/><br/>
-                           <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.startup.created_at}}</span></small>
-                       </div>
+                                    <ul class="list-inline list-inline-separate text-muted mb-10">
+                                        <li><a style="color: #999; cursor: default;">{{s.startup.slogan}}</a></li>
+                                    </ul>
+                                    {{s.startup.description.substring(0, 150)}}<span ng-show='s.startup.description.length > 150'>..</span>
 
 
-							</div>
+                                    <br/><br/>
 
-					    	<div class="panel-footer text-left">
-                                                    <div style='padding-left: 20px;'>
-                                                         {{s.role}}
-                                                    </div>
-						    	
-							</div>
-						</div>
-                        </div><!--
-                    
-                    <ul class="media-list content-group startups-list-container" style="display: none;">
+                                    <div><small class="text-muted">Liderada por : <a ng-click="memberProfile(s.startup.CEO.username)">{{s.startup.CEO.name}}</a></small></div>
+                                </div>
 
-                        <li class="media panel panel-body stack-media-on-mobile sta"rtup-row>
-                            <div class="media-left">
-                                <a ng-click='startupProfile(s.startup.username)'>
-                                    <img ng-src="{{s.startup.imageUrl}}" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
-                                </a>
-                                <br/><br/>
+                                <div class="media-right text-nowrap">
+                                    <p><span class="heading-text pull-right">
+                                            <i ng-class="s.startup.rating >= 1 ? 'icon-star-full2' : (s.startup.rating > 0 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                            <i ng-class="s.startup.rating >= 2 ? 'icon-star-full2' : (s.startup.rating > 1 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                            <i ng-class="s.startup.rating >= 3 ? 'icon-star-full2' : (s.startup.rating > 2 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                            <i ng-class="s.startup.rating >= 4 ? 'icon-star-full2' : (s.startup.rating > 3 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                            <i ng-class="s.startup.rating >= 5 ? 'icon-star-full2' : (s.startup.rating > 4 ? 'icon-star-half' : 'icon-star-empty3')" class=" text-size-base text-warning-300"></i>
+
+                                            <span class="text-muted position-right">({{s.startup.rating}})</span>
+                                        </span>
+                                    </p>
+                                    <br/>
+                                    <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.startup.members_qty}} membros</span>
+
+                                    <br/><br/>
+                                    <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.startup.created_at}}</span></small>
+                                </div>
+
+
                             </div>
 
-                            <div class="media-body">
-                                <h6 class="media-heading text-semibold">
-                                    <a style="color: #333; font-weight: bold;" ng-click='startupProfile(s.startup.username)' >{{s.startup.name}}</a>
-                                </h6>
-
-                                <ul class="list-inline list-inline-separate text-muted mb-10">
-                                    <li><a style="color: #999; cursor: default;">{{s.startup.slogan}}</a></li>
-                                </ul>
-                                {{s.startup.description.substring(0, 150)}}<span ng-show='s.startup.description.length > 150'>..</span>
-
-
-                                <br/><br/>
-
-                                <div><span class="label label-default">
+                            <div class="panel-footer text-left">
+                                <div style='padding-left: 20px;'>
                                     {{s.role}}
-                                </span></div>
+                                </div>
+
                             </div>
+                        </div>
+                    </div><!--
+                
+                <ul class="media-list content-group startups-list-container" style="display: none;">
 
-                            <div class="media-right text-nowrap">
-                                
-                                
-                                <br/><br/>
-                                <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.startup.members_qty}} membros</span>
+                    <li class="media panel panel-body stack-media-on-mobile sta"rtup-row>
+                        <div class="media-left">
+                            <a ng-click='startupProfile(s.startup.username)'>
+                                <img ng-src="{{s.startup.imageUrl}}" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                            </a>
+                            <br/><br/>
+                        </div>
 
-                                <br/><br/>
-                                <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.startup.created_at}}</span></small>
-                            </div>
+                        <div class="media-body">
+                            <h6 class="media-heading text-semibold">
+                                <a style="color: #333; font-weight: bold;" ng-click='startupProfile(s.startup.username)' >{{s.startup.name}}</a>
+                            </h6>
 
-                        </li>
+                            <ul class="list-inline list-inline-separate text-muted mb-10">
+                                <li><a style="color: #999; cursor: default;">{{s.startup.slogan}}</a></li>
+                            </ul>
+                            {{s.startup.description.substring(0, 150)}}<span ng-show='s.startup.description.length > 150'>..</span>
 
 
-                    </ul>
+                            <br/><br/>
+
+                            <div><span class="label label-default">
+                                {{s.role}}
+                            </span></div>
+                        </div>
+
+                        <div class="media-right text-nowrap">
+                            
+                            
+                            <br/><br/>
+                            <small>Team actual</small><span class="text-muted"> <br/><i class="icon-users position-left"></i> {{s.startup.members_qty}} membros</span>
+
+                            <br/><br/>
+                            <small> Iniciada em <br/> <span class="text-muted"><i class="icon-calendar position-left"></i>{{s.startup.created_at}}</span></small>
+                        </div>
+
+                    </li>
+
+
+                </ul>
                     -->
                     <div class='startus-preloader'>
                         <br/><br/><br/>
@@ -163,8 +165,8 @@
                             <h1 style="font-size: 100px; font-weight: bold;">:(</h1>
                             <h2>Nao tem nenhuma Startup associada!</h2>
                             <br/>
-                               <!-- <button href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Startup</button>-->
-                        
+                            <!-- <button href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Startup</button>-->
+
                             <br/>
                         </center>
 
@@ -173,68 +175,68 @@
 
                     </list>
 
-
-                   <!-- <div class="panel panel-body stack-media-on-mobile">
-                        <div class="media-left">
-                            <a href="#" class="btn btn-link btn-icon text-success">
-                                <i class="icon-question7 icon-2x no-edge-top"></i>
-                            </a>
-                        </div>
-
-                        <div class="media-body media-middle">
-                            <h6 class="media-heading text-semibold">Tem outra startup ?</h6>
-                            Esta opcao permite que adiciones todas as startups que lideras/participas. com isso podes atrair parceiros e ate investidores.
-
-                        </div>
-
-                        <div class="media-right media-middle">
-                            <a href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Startup</a>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="panel-body">
-                            <div class="col-sm-10">
-
-                                <fieldset>
-                                    <legend class="text-semibold">Introduza a Informação da Startup</legend>
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 control-label">Nome da Startup :</label>
-                                        <div class="col-lg-9">
-                                            <input type="text" class="form-control" placeholder="Escreva o nome da sua marca ou negócio..">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 control-label">Slogan :</label>
-                                        <div class="col-lg-9">
-                                            <input type="password" class="form-control" placeholder="Escreva ">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="col-lg-3 control-label">Descrição :</label>
-                                        <div class="col-lg-9">
-                                            <textarea rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
-                                        </div>
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                            <div class="col-sm-2 text-center">
-                                <img src="webroot/assets/images/demo/brands/dell.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
-                                <br/><br/>
-                                <button class="btn btn-default btn-block">Salvar</button>
-                                <br/>
-                                <a href="#" class="text-danger-600">Cancelar</a>
-                            </div>
-                        </div>
-                    </div>-->
+                    <!--Add Startup-->
+                    <!--                     <div class="panel panel-body stack-media-on-mobile">
+                                             <div class="media-left">
+                                                 <a href="#" class="btn btn-link btn-icon text-success">
+                                                     <i class="icon-question7 icon-2x no-edge-top"></i>
+                                                 </a>
+                                             </div>
+                     
+                                             <div class="media-body media-middle">
+                                                 <h6 class="media-heading text-semibold">Tem outra startup ?</h6>
+                                                 Esta opcao permite que adiciones todas as startups que lideras/participas. com isso podes atrair parceiros e ate investidores.
+                     
+                                             </div>
+                     
+                                             <div class="media-right media-middle">
+                                                 <a href="#" class="btn btn-success btn-lg"><i class="icon-plus22 position-left"></i> Adicionar Startup</a>
+                                             </div>
+                                         </div>
+                     
+                                         <div class="row">
+                                             <div class="panel-body">
+                                                 <div class="col-sm-10">
+                     
+                                                     <fieldset>
+                                                         <legend class="text-semibold">Introduza a Informação da Startup</legend>
+                     
+                                                         <div class="form-group row">
+                                                             <label class="col-lg-3 control-label">Nome da Startup :</label>
+                                                             <div class="col-lg-9">
+                                                                 <input type="text" class="form-control" placeholder="Escreva o nome da sua marca ou negócio..">
+                                                             </div>
+                                                         </div>
+                     
+                                                         <div class="form-group row">
+                                                             <label class="col-lg-3 control-label">Slogan :</label>
+                                                             <div class="col-lg-9">
+                                                                 <input type="password" class="form-control" placeholder="Escreva ">
+                                                             </div>
+                                                         </div>
+                     
+                                                         <div class="form-group row">
+                                                             <label class="col-lg-3 control-label">Descrição :</label>
+                                                             <div class="col-lg-9">
+                                                                 <textarea rows="5" cols="5" class="form-control" placeholder="Enter your message here"></textarea>
+                                                             </div>
+                                                         </div>
+                                                     </fieldset>
+                     
+                                                 </div>
+                                                 <div class="col-sm-2 text-center">
+                                                     <img src="webroot/assets/images/demo/brands/dell.png" style="width: 110px !important; height: 110px !important;" class="img-rounded img-lg" alt="">
+                                                     <br/><br/>
+                                                     <button class="btn btn-default btn-block">Salvar</button>
+                                                     <br/>
+                                                     <a href="#" class="text-danger-600">Cancelar</a>
+                                                 </div>
+                                             </div>
+                                         </div>-->
 
                 </div> 
 
-
+                <!--Formações-->
                 <div class="tab-pane fade" id="schedule">
                     <div class="timeline timeline-left content-group">
                         <div class="timeline-container">
@@ -328,7 +330,7 @@
 
                 </div>
 
-
+                <!--Trabalhos--> 
                 <div class="tab-pane fade" id="settings">
 
                     <div class="timeline timeline-left content-group">
@@ -448,13 +450,13 @@
                     </small>
                 </h6>
             </div>
-            
+
 
             <div class="panel-footer text-center no-padding">
                 <div class="row">
                     <div class="category-content">
                         <div class="form-group" style='padding-bottom: 25px;'>
-                            <label class="control-label no-margin pull-left text-semibold">Morada</label>
+                            <label class="control-label no-margin pull-left text-semibold">Cidade</label>
                             <div class="pull-right"><span class="label bg-success">{{member.city.name}}</span></div>
                         </div>
 
@@ -515,7 +517,7 @@
                             <span ng-if="!member.technologies" class="no-value-field"><br/><br/>
                                 Nenhuma até então
                             </span>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -523,6 +525,302 @@
         </div>
 
 
+        <!-- Social Media form -->
+        <div id="modal-social-links2" class="modal fade">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content login-form">
+
+                    <!-- Form -->
+                    <form class="modal-body">
+                        <div class="text-center">
+                            <div class="icon-object border-danger-600 text-danger-600"><i class="icon-reading"></i></div>
+                            <h5 class="content-group">Editar Redes Sociais e Website</h5>
+                        </div>
+
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.website" placeholder="website">
+                            <div class="form-control-feedback">
+                                <i class="icon-earth text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.facebook" placeholder="Facebook Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-facebook2 text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.instagram" placeholder="Instagram Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-instagram text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.twitter" placeholder="Twitter Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-twitter2 text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.github" placeholder="Github Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-github text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.stackoverflow" placeholder="StackOverflow Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-stackoverflow text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.linkedIn" placeholder="LinkedIn Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-linkedin text-muted"></i>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group login-options">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    <!--<a href="#">Esqueceu senha?</a>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn bg-success-700 btn-block">Actualizar </button>
+                        </div>
+
+                    </form>
+                    <!-- /form -->
+
+                </div>
+            </div>
+        </div>
+        <!-- /Social Media form -->
+
+
+
+
+        <!-- Personal Data form -->
+        <div id="modal-social-links" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content login-form">
+
+                    <!-- Form 
+                    <form class="modal-body">
+                        <div class="text-center">
+                            <div class="icon-object border-danger-600 text-danger-600"><i class="icon-reading"></i></div>
+                            <h5 class="content-group">Editar Dados Pessoais</h5>
+                        </div>
+                        
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.website" placeholder="website">
+                            <div class="form-control-feedback">
+                                <i class="icon-earth text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.facebook" placeholder="Facebook Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-facebook2 text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.instagram" placeholder="Instagram Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-instagram text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.twitter" placeholder="Twitter Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-twitter2 text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.github" placeholder="Github Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-github text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.stackoverflow" placeholder="StackOverflow Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-stackoverflow text-muted"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback has-feedback-left">
+                            <input type="text" class="form-control" ng-model="member.linkedIn" placeholder="LinkedIn Profile link">
+                            <div class="form-control-feedback">
+                                <i class="icon-linkedin text-muted"></i>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group login-options">
+                            <div class="row">
+                                <div class="col-sm-6">
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn bg-success-700 btn-block">Actualizar </button>
+                        </div>
+
+                        </form>
+                     /form -->
+
+
+                    <!-- Update Form -->
+                    <form action="#" class="registration-form">
+                        <div class="row">
+                                    <div class="panel-body">
+                                        <div class="text-center">
+                                            <div class="icon-object border-success text-success"><i class="icon-plus3"></i></div>
+                                            <h5 class="content-group-lg">Criar Conta <small class="display-block">Todos campos são obrigatórios</small></h5>
+                                        </div>
+
+                                        <div class="form-group has-feedback">
+                                             
+                                            <input class="form-control" placeholder="Escolha um Username" type="text" ng-model="member.username">
+                                            <div class="form-control-feedback">
+                                                <i class="icon-user-plus text-muted"></i>
+                                            </div>
+                                            <span class="pull-right" style="color: red;">*<small>O username não pode conter espaços, separe or underscores(_) ou iféns(-)</small></span>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    Email
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    <input class="form-control" placeholder="Email" type="email" ng-model="member.email">
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-mention text-muted"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    Titulo Profissional/ Profissão
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    <input class="form-control" placeholder="Titulo" type="text" ng-model="member.title">
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-pencil text-muted"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>
+                                                    Celular
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    <input class="form-control" placeholder="Nr. Celular" type="number" ng-model="member.phone">
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user-lock text-muted"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    Ocupação
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    <select class="form-control" id="city-filter" ng-model="member.occupation">
+                                                        <option value="Estudante">Estudante</option>
+                                                        <option value="Trabalhador">Trabalhador</option>
+                                                    </select>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user-lock text-muted"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div>
+                                                    Género
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    <select class="form-control" id="city-filter" ng-model="member.gender">
+                                                        <option value="Masculino">Masculino</option>
+                                                        <option value="Femenino">Femenino</option>
+                                                    </select>
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user-lock text-muted"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group has-feedback">
+                                                    <input class="form-control" placeholder="Tecnologias/Plataformas/Software usados no teu dia-a-dia" type="text" ng-model="member.technologies">
+                                                    <div class="form-control-feedback">
+                                                        <i class="icon-user-lock text-muted"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="pull-right" style="color: red;">*<small>Separe as tecnologias com virgulas</small></span>
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-top: 30px"></div>
+                                        <div class="clearfix">
+                                            <button class="btn btn-labeled btn-labeled-right pull-right" ng-click="flushOnServer()"><b><i class="icon-plus3"></i></b> Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                    </form>
+
+                    <!-- /Update Form -->
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /Personal Data form -->
 
     </div>
 </div>

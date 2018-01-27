@@ -7,7 +7,7 @@
     <deployment-mode>DEVELOPMENT</deployment-mode>
     <default-lang>pt</default-lang>
     <web>
-        <welcome-url>members/index</welcome-url>
+        <welcome-url>startups/index</welcome-url>
     </web>
        
 </app>
